@@ -31,6 +31,7 @@ context configuration
 
 Add store configuration to PersistentManager as follows:
 
+```
 <Context>
     <Manager className="org.apache.catalina.session.PersistentManager" maxIdleBackup="0" maxIdleSwap="0" minIdleSwap="0">
         <Store className="com.mangora.commons.tomcat.CassandraSessionStore" nodes="[comma separated list of nodes]"
@@ -38,4 +39,4 @@ Add store configuration to PersistentManager as follows:
             ttlSeconds=[ttlSeconds]/>
     </Manager>
 </Context>
-
+```
