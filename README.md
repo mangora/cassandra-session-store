@@ -29,7 +29,7 @@ lib folder
 context configuration
 ======================
 
-Add store configuration to PersistentManager as follows:
+Add store configuration to PersistentManager (see Tomcat docs about it http://tomcat.apache.org/tomcat-7.0-doc/config/manager.html) as follows:
 
 ```
 <Context>
@@ -40,3 +40,15 @@ Add store configuration to PersistentManager as follows:
     </Manager>
 </Context>
 ```
+
+Available Parameters
+---------------------
+
+Name  | Value
+----- | ---------
+nodes | comma separated list of Cassandra nodes (ip or server name)
+consistencyLevel | Cassandra cluster consistency level
+keySpace | Cassandra keyspace name
+columnFamily | Cassandra column family name
+ttlSeconds | (optional, default infinite) set the expiry date of inactive session in Cassandra. If set, after teh given seconds of inactivity the session is removed from the store 
+
