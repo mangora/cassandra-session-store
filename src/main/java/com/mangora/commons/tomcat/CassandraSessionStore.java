@@ -147,8 +147,19 @@ public class CassandraSessionStore extends StoreBase {
 
     @Override
     protected synchronized void startInternal() throws LifecycleException {
-        Cluster cluster =   new Cluster(nodes, 9160);
-        pelopsPool = new CommonsBackedPool(cluster, keySpace);
+        Cluster cluster =   new Cluster(nodes, 9160, 20000, false);
+
+        CommonsBackedPool.Policy policy =   new CommonsBackedPool.Policy();
+        policy.setMaxWaitForConnection(24000);
+        policy.setTestConnectionsWhileIdle(true);
+        policy.setTimeBetweenScheduledMaintenanceTaskRunsMillis(20000);
+        policy.setMaxTotal(2048);
+
+        OperandPolicy operandPolicy =   new OperandPolicy();
+        operandPolicy.setDeleteIfNull(true);
+        operandPolicy.setMaxOpRetries(3);
+        pelopsPool = new CommonsBackedPool(cluster, keySpace, policy, operandPolicy);
+
         mapper = new ObjectMapper();
 
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
