@@ -42,6 +42,8 @@ public class CassandraSessionStore extends StoreBase {
     private String keySpace;
     private Long ttlSeconds = -1L;
 
+    private Integer maxTotalConnections = 4096;
+
     public CassandraSessionStore() {
 
     }
@@ -153,7 +155,7 @@ public class CassandraSessionStore extends StoreBase {
         policy.setMaxWaitForConnection(24000);
         policy.setTestConnectionsWhileIdle(true);
         policy.setTimeBetweenScheduledMaintenanceTaskRunsMillis(20000);
-        policy.setMaxTotal(2048);
+        policy.setMaxTotal(maxTotalConnections);
 
         OperandPolicy operandPolicy =   new OperandPolicy();
         operandPolicy.setDeleteIfNull(true);
@@ -222,4 +224,10 @@ public class CassandraSessionStore extends StoreBase {
     public void setColumnFamily(String columnFamily) {
         this.columnFamily = columnFamily;
     }
+
+    public void setMaxTotalConnections(Integer maxTotalConnections) {
+        this.maxTotalConnections = maxTotalConnections;
+    }
+
+
 }
