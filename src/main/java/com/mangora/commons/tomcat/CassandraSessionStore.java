@@ -42,7 +42,7 @@ public class CassandraSessionStore extends StoreBase {
     private String keySpace;
     private Long ttlSeconds = -1L;
 
-    private Integer maxTotalConnections = 4096;
+    private Integer maxTotalConnections = 2048;
 
     public CassandraSessionStore() {
 
