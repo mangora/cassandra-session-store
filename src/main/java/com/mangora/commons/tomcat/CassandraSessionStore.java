@@ -149,7 +149,7 @@ public class CassandraSessionStore extends StoreBase {
 
     @Override
     protected synchronized void startInternal() throws LifecycleException {
-        Cluster cluster =   new Cluster(nodes, 9160, 20000, false);
+        Cluster cluster =   new Cluster(nodes, 9160, 40000, false);
 
         CommonsBackedPool.Policy policy =   new CommonsBackedPool.Policy();
         policy.setMaxWaitForConnection(24000);
